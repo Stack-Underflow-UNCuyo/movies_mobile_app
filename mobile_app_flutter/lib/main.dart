@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_app_flutter/features/peliculas/presentation/pages/inicio_page.dart';
+import 'package:mobile_app_flutter/features/peliculas/presentation/pages/movie_detail_page.dart';
 import 'package:mobile_app_flutter/features/peliculas/providers/movie_provider.dart';
 import 'package:provider/provider.dart';
+import 'dart:io'; // Para permitir conexiones HTTP inseguras 
 
 /*
   ChangeNotifierProvider envuelve toda la app, 
@@ -10,10 +12,13 @@ import 'package:provider/provider.dart';
       Crea el MovieProvider y al mismo tiempo llama a getOnDisplayMovies(), 
       entonces las películas empiezan a cargarse apenas abre la app.
   */
-void main() => runApp(
-  ChangeNotifierProvider(
+void main() {
+  HttpOverrides.global = MyHttpOverrides();
+  runApp(
+    ChangeNotifierProvider(
     create: (_) => MovieProvider()..getOnDisplayMovies(), 
     child: const MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -21,8 +26,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: InicioPage()
+      debugShowCheckedModeBanner: false,
+      title: 'Peliculas App',
+      //usamos 'initialRoute' cuando trabajamos con rutas nombradas
+      initialRoute: '/', 
+      routes: {
+        '/': (context) => const InicioPage(), 
+        '/movie-detail': (context) => const MovieDetailPage(), 
+      },
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }

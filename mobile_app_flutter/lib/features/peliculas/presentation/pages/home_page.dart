@@ -48,11 +48,11 @@ class HomePage extends StatelessWidget {
                 //Separaddor con titulo
                 const SliverToBoxAdapter(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(16,24,16,12), //espaciado (padding o margin)
+                    padding: EdgeInsets.fromLTRB(16,0,16,5), //espaciado (padding o margin)
                     child: Text(
                       'Todas las películas',
                       style: TextStyle( 
-                        color: AppColors.textPrimary,
+                        color: AppColors.primary,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                       ),
@@ -87,10 +87,10 @@ class _MovieCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 260,
+      height: 280,
       child: ListView.builder(
         scrollDirection: Axis.horizontal, //cambia la direccion
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         itemCount: movies.length,
         itemBuilder: (context, index) { //va creando los items a medida que se necesitan
           final movie = movies[index];

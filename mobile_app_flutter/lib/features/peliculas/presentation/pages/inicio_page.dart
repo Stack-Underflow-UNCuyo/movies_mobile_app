@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:mobile_app_flutter/core/utils/app_colors.dart';
 import 'package:mobile_app_flutter/features/peliculas/presentation/pages/favoritos_page.dart';
 import 'package:mobile_app_flutter/features/peliculas/presentation/pages/home_page.dart';
+import 'package:mobile_app_flutter/features/peliculas/presentation/pages/movie_detail_page.dart';
 import 'package:mobile_app_flutter/features/peliculas/presentation/pages/perfil_page.dart';
 
 /*
